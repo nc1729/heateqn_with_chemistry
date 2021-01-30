@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <cstdint>
 #include "ConfFileData.h"
 #include "Log.h"
 
@@ -40,9 +41,9 @@ ConfFileData::ConfFileData(std::string path)
 		{
 			// Line defines a string variable
 			// Line is of the form var_name="var_value"
-			__int64 equals_pos = line.find('=');
+			std::int64_t equals_pos = line.find('=');
 			std::string var_name = line.substr(0, equals_pos);
-			std::string var_value = line.substr((__int64)equals_pos + 1);
+			std::string var_value = line.substr((std::int64_t)equals_pos + 1);
 
 			// Strip " characters from string
 			var_value = var_value.substr(1, var_value.length() - 2);
@@ -54,7 +55,7 @@ ConfFileData::ConfFileData(std::string path)
 		{
 			// Line defines a double variable
 			// Line is of the form var_name=var_value
-			__int64 equals_pos = line.find('=');
+			std::int64_t equals_pos = line.find('=');
 			std::string var_name = line.substr(0, equals_pos);
 			double var_value = stod(line.substr(equals_pos + 1));
 			double_variables.insert(std::make_pair(var_name, var_value));
@@ -63,7 +64,7 @@ ConfFileData::ConfFileData(std::string path)
 		{
 			// Line defines a boolean variable
 			// Line is of the form var_name=true or var_name=false
-			__int64 equals_pos = line.find('=');
+			std::int64_t equals_pos = line.find('=');
 			std::string var_name = line.substr(0, equals_pos);
 			if (line.find("true") != std::string::npos)
 			{
@@ -78,9 +79,9 @@ ConfFileData::ConfFileData(std::string path)
 		{
 			// Default behaviour is to assume line defines integer variable
 			// Line is of the form var_name=var_value
-			__int64 equals_pos = line.find('=');
+			std::int64_t equals_pos = line.find('=');
 			std::string var_name = line.substr(0, equals_pos);
-			__int64 var_value = stoi(line.substr(equals_pos + 1));
+			std::int64_t var_value = stoi(line.substr(equals_pos + 1));
 			int_variables.insert(std::make_pair(var_name, var_value));
 		}
 	}

@@ -20,7 +20,8 @@ CFLAGS = -Wall -Werror -Wextra
 #
 # Project files
 #
-SRCS = main.cpp Log.cpp ConfFileData.cpp CSVFileData.cpp Mesh.cpp heateqn_solver.cpp thermodynamics.cpp
+SRCS = ChemSpecies.cpp ConfFileData.cpp CSVFileData.cpp heateqn_solver.cpp \
+Log.cpp main.cpp Mesh.cpp test.cpp thermodynamics.cpp
 OBJS = $(SRCS:.cpp=.o)
 EXE = heateqn_with_chemistry
 
@@ -30,7 +31,7 @@ EXE = heateqn_with_chemistry
 DBGDIR = build/debug
 DBGEXE = $(DBGDIR)/$(EXE)
 DBGOBJS = $(addprefix $(DBGDIR)/, $(OBJS))
-DBGCFLAGS = -g -DDEBUG
+DBGCFLAGS = -g -DDEBUG -fopenmp
 
 #
 # Release build settings
@@ -38,7 +39,7 @@ DBGCFLAGS = -g -DDEBUG
 RELDIR = build/release
 RELEXE = $(RELDIR)/$(EXE)
 RELOBJS = $(addprefix $(RELDIR)/, $(OBJS))
-RELCFLAGS = -O2 -DNDEBUG
+RELCFLAGS = -O2 -DNDEBUG -fopenmp
 
 # Makes Makefile always see these as tasks, rather than potential files
 .PHONY: all clean debug prep debug_prep release_prep release remake

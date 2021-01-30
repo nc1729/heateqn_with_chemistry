@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <fstream>
+#include <cmath>
 #include <iomanip> // for std::setprecision
 
 Mesh::Mesh(size_t const mesh_size, std::string const& mesh_name)
@@ -40,6 +41,10 @@ void Mesh::fill(double const value)
 }
 double Mesh::laplacian(size_t const index) const
 {
+	if (index)
+	{
+		// gcc complains if index isn't used
+	}
 	return 0.0;
 }
 bool Mesh::nearly_equal(Mesh& other)
@@ -54,14 +59,14 @@ bool Mesh::nearly_equal(Mesh& other)
 	{
 		sum_of_square_diffs += ((*this)[n] - other[n]) * ((*this)[n] - other[n]);
 	}
-	return (sum_of_square_diffs < pow(10, -12));
+	return (sum_of_square_diffs < std::pow(10, -12));
 }
 bool Mesh::is_nan() const
 {
 	// check all points in mesh for NaN
 	for (auto& point : _mesh_data)
 	{
-		if (isnan(point)) return true;
+		if (std::isnan(point)) return true;
 	}
 	return false;
 }

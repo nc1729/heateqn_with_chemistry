@@ -151,7 +151,7 @@ void heateqn_solver(ConfFileData& cf, CSVFileData& csv_file_data, std::ofstream&
 	{
 		// loop over points in mesh
 #pragma omp parallel for
-		for (int index = 0; index < mesh_size; index++)
+		for (size_t index = 0; index < mesh_size; index++)
 		{
 			if (not temp.is_on_boundary(index))
 			{
@@ -301,7 +301,7 @@ void heateqn_solver(ConfFileData& cf, CSVFileData& csv_file_data, std::ofstream&
 		{
 			// loop over all points in meshes
 #pragma omp parallel for
-			for (int index = 0; index < mesh_size; index++)
+			for (size_t index = 0; index < mesh_size; index++)
 			{
 				if (not temp.is_on_boundary(index))
 				{

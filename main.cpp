@@ -9,12 +9,12 @@
 int main()
 {
 	// Read in file data
-	ConfFileData conf_file_data("settings_v3.conf");
+	ConfFileData conf_file_data("settings.conf");
 	CSVFileData csv_file_data(conf_file_data._chemistry_file);
 
 	// Set up log file and dump conf_file_data to log
 	std::ofstream log_file(conf_file_data._log_filename);
-	Log::write(log_file, "settings_v3.conf and " + conf_file_data._chemistry_file + " read successfully.\n");
+	Log::write(log_file, "settings.conf and " + conf_file_data._chemistry_file + " read successfully.\n");
 	Log::write_to_console("Writing read-in settings to log file: " + conf_file_data._log_filename + '\n');
 	conf_file_data.log_input(log_file);
 	
